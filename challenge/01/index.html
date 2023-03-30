@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge 01</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../../assets/style.css" />
+  </head>
+  <body>
+    <div class="login-root">
+      <div
+        class="box-root flex-flex flex-direction--column"
+        style="min-height: 100vh; flex-grow: 1"
+      >
+        <div
+          class="box-root padding-top--24 flex-flex flex-direction--column"
+          style="flex-grow: 1; z-index: 9"
+        >
+          <div
+            class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center"
+          >
+            <h1>Print all Integer Numbers</h1>
+          </div>
+          <div class="formbg-outer">
+            <div class="formbg">
+              <div class="formbg-inner padding-horizontal--20">
+                <form id="stripe-login">
+                  <div class="field padding-bottom--24">
+                    <label for="num1">Number 1 (Give Integer Number)</label>
+                    <input id="num1" type="number" name="num1" />
+                  </div>
+                  <div class="field padding-bottom--24">
+                    <label for="num2"
+                      >Number 2 (Give Integer Number greater than Previous
+                      Number)</label
+                    >
+                    <input id="num2" type="number" name="num2" />
+                  </div>
+                  <div class="field padding-bottom--24">
+                    <button id="calculateBtn" type="submit">Print</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <p id="result">Click The Above 'Print' Button</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (() => {
+        function printNumbers(start, end) {
+          let str = "";
+          for (var i = start; i <= end; i++) {
+            str += `${i}, `;
+          }
+          return str;
+        }
+
+        // getting input
+        function getInput() {
+          let num1 = null;
+          let num2 = null;
+          const firstInput = document.querySelector("#num1");
+          const secondInput = document.querySelector("#num2");
+          if (firstInput.value && secondInput.value) {
+            num1 = parseInt(firstInput.value);
+            num2 = parseInt(secondInput.value);
+          }
+          return {
+            num1,
+            num2,
+          };
+        }
+
+        // getting DOM Elements
+        const resultUI = document.querySelector("#result");
+        const calculateBtn = document.querySelector("#calculateBtn");
+
+        // listening to the Click Event
+        calculateBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const { num1, num2 } = getInput() || {};
+          let result = "Please Give Proper Values to get the Correct Output";
+          if (num1 && num2 && num2 > num1) {
+            const output = printNumbers(num1, num2);
+            result = `${output}`;
+          }
+          resultUI.innerHTML = result;
+        });
+      })();
+    </script>
+  </body>
+</html>
